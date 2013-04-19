@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Elite" table="bbscs_elite">
+    <id name="id" column="ID" type="long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+    <property column="BoardID" length="20" name="boardID" not-null="true" type="long"/>
+    <property column="ParentID" length="20" name="parentID" not-null="true" type="long"/>
+    <property column="ParentIDs" name="parentIDs" type="com.laoer.bbscs.ext.hibernate.SplitList"/>
+    <property column="EliteName" length="90" name="eliteName" type="string"/>
+    <property column="CreateUser" length="60" name="createUser" type="string"/>
+    <property column="EliteTime" length="20" name="eliteTime" type="long"/>
+    <property column="Orders" length="11" name="orders" type="int"/>
+  </class>
+</hibernate-mapping>

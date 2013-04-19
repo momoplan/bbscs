@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="UserDetail" table="bbscs_userdetail" lazy="true">
+    <!--
+      <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+      </id>
+    -->
+    <id name="id" column="ID">
+      <generator class="foreign">
+        <param name="property">userInfo</param>
+      </generator>
+    </id>
+    <!--<property column="UserID" length="20" name="userID" not-null="true" type="string"/>-->
+    <property column="Height" length="255" name="height" type="string"/>
+    <property column="Weight" length="255" name="weight" type="string"/>
+    <property column="Interest" length="255" name="interest" type="string"/>
+    <property column="Graduate" length="255" name="graduate" type="string"/>
+    <property column="FavourPeople" length="255" name="favourPeople" type="string"/>
+    <property column="DreamJob" length="255" name="dreamJob" type="string"/>
+    <property column="FavourArt" length="255" name="favourArt" type="string"/>
+    <property column="FavourMusic" length="255" name="favourMusic" type="string"/>
+    <property column="FavourPlace" length="255" name="favourPlace" type="string"/>
+    <property column="FavourMovie" length="255" name="favourMovie" type="string"/>
+    <property column="FavourChat" length="255" name="favourChat" type="string"/>
+    <property column="favourBook" length="255" name="favourBook" type="string"/>
+    <property column="DreamLover" length="255" name="dreamLover" type="string"/>
+    <property column="FavourTeam" length="255" name="favourTeam" type="string"/>
+    <property column="HomePage" length="255" name="homePage" type="string"/>
+    <property column="OicqNo" length="255" name="oicqNo" type="string"/>
+    <property column="IcqNo" length="255" name="icqNo" type="string"/>
+    <property column="Sex" length="1" name="sex" type="int"/>
+    <property column="Brief" length="1000" name="brief" type="string"/>
+    <property column="MSN" length="255" name="msn" type="string"/>
+    <property column="Yahoo" length="255" name="yahoo" type="string"/>
+    <one-to-one name="userInfo" class="com.laoer.bbscs.bean.UserInfo" constrained="true"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  the proxool configuration can be embedded within your own application's.
+  Anything outside the "proxool" tag is ignored.
+-->
+<something-else-entirely>
+  <proxool>
+    <alias>bbscs8db</alias>
+    <driver-url>jdbc:mysql://localhost:3306/bbscs8?useUnicode=true&amp;characterEncoding=UTF-8</driver-url>
+    <driver-class>org.gjt.mm.mysql.Driver</driver-class>
+    <driver-properties>
+      <property name="user" value="root"/>
+      <property name="password" value="abcd1234"/>
+    </driver-properties>
+    <house-keeping-test-sql>select CURRENT_DATE</house-keeping-test-sql>
+    <simultaneous-build-throttle>20</simultaneous-build-throttle>
+    <maximum-connection-count>50</maximum-connection-count>
+    <minimum-connection-count>2</minimum-connection-count>
+    <maximum-connection-lifetime>3600000</maximum-connection-lifetime>
+  </proxool>
+</something-else-entirely>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="UserGroup" table="bbscs_usergroup">
+    <id name="id" column="ID" type="int" unsaved-value="null">
+      <generator class="sequence">
+        <param name="sequence">SEQ_USERGROUP_ID</param>
+      </generator>
+    </id>
+    <property column="GroupName" length="255" name="groupName" not-null="true" type="string"/>
+    <property column="GroupDesc" length="255" name="groupDesc" type="string"/>
+    <property column="TypeID" length="2" name="typeID" not-null="true" type="int"/>
+    <set name="roles" table="bbscs_grouprole" cascade="save-update" lazy="true" fetch="select">
+      <key column="GroupID"/>
+      <many-to-many column="RoleID" class="Role"/>
+    </set>
+  </class>
+</hibernate-mapping>

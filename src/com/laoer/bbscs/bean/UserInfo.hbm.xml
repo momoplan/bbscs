@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="UserInfo" table="bbscs_userinfo">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="UserName" length="20" name="userName" not-null="true" type="string"/>
+    <property column="NickName" length="60" name="nickName" not-null="true" type="string"/>
+    <property column="Passwd" length="40" name="passwd" not-null="true" type="string"/>
+    <property column="RePasswd" length="40" name="rePasswd" not-null="true" type="string"/>
+    <property column="Email" length="255" name="email" not-null="true" type="string"/>
+    <property column="Question" length="255" name="question" not-null="true" type="string"/>
+    <property column="Answer" length="255" name="answer" not-null="true" type="string"/>
+    <property column="RegTime" name="regTime" not-null="true" type="timestamp"/>
+    <property column="LoginTime" name="loginTime" not-null="true" type="timestamp"/>
+    <property column="LoginIP" length="20" name="loginIP" type="string"/>
+    <property column="LoginTimes" length="13" name="loginTimes" not-null="true" type="int"/>
+    <property column="LastLoginTime" name="lastLoginTime" type="timestamp"/>
+    <property column="LastLoginIP" length="20" name="lastLoginIP" type="string"/>
+    <property column="ArticleNum" length="11" name="articleNum" type="int"/>
+    <property column="StayTime" length="13" name="stayTime" type="long"/>
+    <property column="ArticleEliteNum" length="11" name="articleEliteNum" type="int"/>
+    <property column="LifeForce" length="11" name="lifeForce" type="int"/>
+    <property column="UserTitle" length="3" name="userTitle" type="int"/>
+    <property column="Coin" length="11" name="coin" type="int"/>
+    <property column="Literary" length="11" name="literary" type="int"/>
+    <property column="Experience" length="11" name="experience" type="int"/>
+    <property column="UserKnow" length="11" name="userKnow" type="int"/>
+    <property column="SignName0" length="30" name="signName0" type="string"/>
+    <property column="SignDetail0" length="3000" name="signDetail0" type="string"/>
+    <property column="SignName1" length="30" name="signName1" type="string"/>
+    <property column="SignDetail1" length="3000" name="signDetail1" type="string"/>
+    <property column="SignName2" length="30" name="signName2" type="string"/>
+    <property column="SignDetail2" length="3000" name="signDetail2" type="string"/>
+    <property column="HavePic" length="1" name="havePic" type="int"/>
+    <property column="PicFileName" length="255" name="picFileName" type="string"/>
+    <property column="ForumPerNum" length="3" name="forumPerNum" type="int"/>
+    <property column="PostPerNum" length="3" name="postPerNum" type="int"/>
+    <property column="UserFrom" length="255" name="userFrom" type="string"/>
+    <property column="TimeZone" length="20" name="timeZone" type="string"/>
+    <property column="BirthYear" length="4" name="birthYear" type="int"/>
+    <property column="BirthMonth" length="2" name="birthMonth" type="int"/>
+    <property column="BirthDay" length="2" name="birthDay" type="int"/>
+    <property column="ReceiveNote" length="1" name="receiveNote" type="int"/>
+    <property column="AcceptFriend" length="1" name="acceptFriend" type="int"/>
+    <property column="ForumViewMode" length="1" name="forumViewMode" type="int"/>
+    <property column="Validated" length="1" name="validated" type="int"/>
+    <property column="GroupID" length="11" name="groupID" type="int"/>
+    <property column="HiddenLogin" length="1" name="hiddenLogin" type="int"/>
+    <property column="EditType" length="1" name="editType" type="int"/>
+    <property column="UserLocale" length="20" name="userLocale" type="string"/>
+    <property column="ValidateCode" length="20" name="validateCode" type="string"/>
+    <property column="UserNo" length="8" name="userNo" type="string"/>
+    <one-to-one name="userDetail" class="com.laoer.bbscs.bean.UserDetail" lazy="no-proxy" cascade="all"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Commend" table="bbscs_commend">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="BoardID" length="13" name="boardID" not-null="true" type="long"/>
+    <property column="BoardName" length="60" name="boardName" not-null="true" type="string"/>
+    <property column="PostID" length="40" name="postID" not-null="true" type="string"/>
+    <property column="PostMainID" length="40" name="postMainID" not-null="true" type="string"/>
+    <property column="UserID" length="40" name="userID" not-null="true" type="string"/>
+    <property column="UserName" length="20" name="userName" not-null="true" type="string"/>
+    <property column="CommendBoardID" length="13" name="commendBoardID" not-null="true" type="long"/>
+    <property column="CommendTop" length="1" name="commendTop" not-null="true" type="int"/>
+    <property column="Title" length="150" name="title" type="string"/>
+    <property column="BoardCategory" length="40" name="boardCategory" type="string"/>
+    <property column="TopCategory" length="40" name="topCategory" type="string"/>
+    <property column="CreateTime" name="createTime" not-null="true" type="long"/>
+  </class>
+</hibernate-mapping>

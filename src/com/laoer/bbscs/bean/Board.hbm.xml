@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Board" table="bbscs_board">
+    <id name="id" column="ID" type="long" unsaved-value="null">
+      <generator class="identity"/>
+    </id>
+    <property column="ParentID" length="20" name="parentID" not-null="true" type="long"/>
+    <property column="ParentIDs" name="parentIDs" type="com.laoer.bbscs.ext.hibernate.SplitList"/>
+    <property column="ChildIDs" name="childIDs" type="com.laoer.bbscs.ext.hibernate.SplitList"/>
+    <property column="BoardName" length="60" name="boardName" not-null="true" type="string"/>
+    <property column="Explains" name="explains" type="text"/>
+    <property column="Bulletin" name="bulletin" type="text"/>
+    <property column="BoardPic" length="200" name="boardPic" type="string"/>
+    <property column="UseStat" length="1" name="useStat" type="int"/>
+    <property column="Orders" length="11" name="orders" type="int"/>
+    <property column="NeedPasswd" length="1" name="needPasswd" type="int"/>
+    <property column="Passwd" length="100" name="passwd" type="string"/>
+    <property column="BoardLevel" length="11" name="level" type="int"/>
+    <property column="BoardType" length="2" name="boardType" type="int"/>
+    <property column="AllowHTML" length="1" name="allowHTML" type="int"/>
+    <property column="AllowUBB" length="1" name="allowUBB" type="int"/>
+    <property column="AuditPost" length="1" name="auditPost" type="int"/>
+    <property column="AuditAttach" length="1" name="auditAttach" type="int"/>
+    <property column="AddUserPostNum" length="1" name="addUserPostNum" type="int"/>
+    <property column="IsHidden" length="1" name="isHidden" type="int"/>
+    <property column="IsAuth" length="1" name="isAuth" type="int"/>
+    <property column="MainPostNum" length="11" name="mainPostNum" type="long"/>
+    <property column="PostNum" length="11" name="postNum" type="long"/>
+    <!--<map name="boardMaster" inverse="true" cascade="all-delete-orphan" lazy="true">
+      <key column="boardID"/>
+      <map-key column="UserName" type="string"/>
+      <one-to-many class="BoardMaster"/>
+    </map>-->
+    <map name="boardMaster" inverse="true" cascade="all-delete-orphan" lazy="false" fetch="join">
+      <key column="boardID"/>
+      <map-key column="UserName" type="string"/>
+      <one-to-many class="BoardMaster"/>
+    </map>
+    <set name="boardTag" inverse="true" cascade="all-delete-orphan" lazy="false" fetch="join" order-by="orders asc">
+      <key column="boardID"/>
+      <one-to-many class="BoardTag"/>
+    </set>
+  </class>
+</hibernate-mapping>

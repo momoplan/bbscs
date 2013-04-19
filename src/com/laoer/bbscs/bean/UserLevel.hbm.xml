@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="UserLevel" table="bbscs_userlevel">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="LevelName" length="60" name="levelName" not-null="true" type="string"/>
+    <property column="LevelValue" length="11" name="levelValue" not-null="true" type="int"/>
+    <property column="LevelType" length="1" name="levelType" not-null="true" type="int"/>
+  </class>
+</hibernate-mapping>

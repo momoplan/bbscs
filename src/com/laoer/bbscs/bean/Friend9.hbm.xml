@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Friend9" table="bbscs_friend_9">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="UserID" length="40" name="userID" not-null="true" type="string"/>
+    <property column="UserName" length="20" name="userName" not-null="true" type="string"/>
+    <property column="FriendID" length="40" name="friendID" not-null="true" type="string"/>
+    <property column="FriendName" length="20" name="friendName" not-null="true" type="string"/>
+    <property column="FriendComment" length="2000" name="friendComment" type="string"/>
+    <property column="IsBlack" length="1" name="isBlack" type="int"/>
+  </class>
+</hibernate-mapping>

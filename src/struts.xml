@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd" >
+<struts>
+	<package name="bbscs-default" namespace="/"
+		extends="struts-default">
+		<interceptors>
+			<interceptor name="remoteAddrInterceptor"
+				class="com.laoer.bbscs.web.interceptor.RemoteAddrInterceptor">
+			</interceptor>
+			<interceptor-stack name="remoteAddrInterceptorStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="userCookieInterceptor"
+				class="com.laoer.bbscs.web.interceptor.UserCookieInterceptor">
+			</interceptor>
+			<interceptor name="userSessionInterceptor"
+				class="com.laoer.bbscs.web.interceptor.UserSessionInterceptor">
+			</interceptor>
+			<interceptor name="userLoginInterceptor"
+				class="com.laoer.bbscs.web.interceptor.UserLoginInterceptor">
+			</interceptor>
+			<interceptor name="userPermissionInterceptor"
+				class="com.laoer.bbscs.web.interceptor.UserPermissionInterceptor">
+			</interceptor>
+			<interceptor name="boardInterceptor"
+				class="com.laoer.bbscs.web.interceptor.BoardInterceptor">
+			</interceptor>
+			<interceptor name="userOnlineInterceptor"
+				class="com.laoer.bbscs.web.interceptor.UserOnlineInterceptor">
+			</interceptor>
+			<interceptor-stack name="userSessionInterceptorStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="userLoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="userSessionInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="requestBasePathInterceptor"
+				class="com.laoer.bbscs.web.interceptor.RequestBasePathInterceptor">
+			</interceptor>
+			<interceptor-stack name="userAuthInterceptorStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="userLoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="userPermissionInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="mainUserAuthInterceptorStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="userLoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="userSessionInterceptor"></interceptor-ref>
+				<interceptor-ref name="userOnlineInterceptor"></interceptor-ref>
+				<interceptor-ref name="userPermissionInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="boardInterceptorStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="userLoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="userOnlineInterceptor"></interceptor-ref>
+				<interceptor-ref name="boardInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="htmlError">/WEB-INF/jsp/htmlError.jsp</result>
+			<result name="ajaxjson">/WEB-INF/jsp/ajaxjson.jsp</result>
+			<result name="jsonstring">/WEB-INF/jsp/jsonstring.jsp</result>
+			<result name="intercepthtml">/WEB-INF/jsp/intercepthtml.jsp</result>
+			<result name="intercepthtmlpass">/WEB-INF/jsp/intercepthtmlpass.jsp</result>
+			<result name="interceptshtml">/WEB-INF/jsp/interceptshtml.jsp</result>
+			<!-- <result name="relogin" type="redirect-action">login?action=relogin</result> -->
+			<result name="relogin" type="redirect">http://users.ruyicai.com/login.jsp</result>
+			<result name="boardPasswd">/WEB-INF/jsp/boardPasswd.jsp</result>
+		</global-results>
+	</package>
+	<package name="reg" extends="bbscs-default" namespace="/reg">
+		<global-results>
+			<result name="input">/WEB-INF/jsp/reg.jsp</result>
+			<result name="passreg" type="redirect">
+				${sysConfig.getPassRegUrl()}
+			</result>
+		</global-results>
+		<action name="input" class="regAction" method="input"></action>
+		<action name="add" class="regAction" method="add">
+			<interceptor-ref name="remoteAddrInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="userCookieInterceptor"></interceptor-ref>
+			<result name="success" type="redirect">
+				/regSucceed.jsp
+			</result>
+		</action>
+		<action name="check" class="checkUserNameAction"></action>
+		<action name="validateuser" class="regValidateAction" method="validateuser">
+			<result name="success" type="redirect">
+				/validateSucceed.jsp
+			</result>
+		</action>
+	</package>
+	<package name="loginout" extends="bbscs-default" namespace="/">
+		<action name="login" class="loginAction">
+			<result name="success" type="redirect">${tourl}</result>
+			<result name="input">/WEB-INF/jsp/login.jsp</result>
+			<result name="loginPass">/WEB-INF/jsp/passLogin.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			<interceptor-ref name="userCookieInterceptor"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+		</action>
+	</package>
+	<package name="admin" extends="bbscs-default" namespace="/">
+		<default-interceptor-ref name="userAuthInterceptorStack"></default-interceptor-ref>
+		<action name="adminMain">
+			<result>/WEB-INF/admin/adminMain.jsp</result>
+		</action>
+		<action name="adminLeft">
+			<result>/WEB-INF/admin/adminLeft.jsp</result>
+		</action>
+		<action name="adminLogout" class="adminLogoutAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userCookieInterceptor"></interceptor-ref>
+			<result name="success" type="redirect-action">
+				login?action=admin
+			</result>
+		</action>
+		<action name="adminOpenSet" class="adminOpenSetAction">
+			<result name="input">/WEB-INF/admin/openSet.jsp</result>
+		</action>
+		<action name="adminWebset" class="adminWebsetAction">
+			<result name="input">/WEB-INF/admin/webSet.jsp</result>
+		</action>
+		<action name="adminBaseSet" class="adminBaseSetAction">
+			<result name="input">/WEB-INF/admin/baseSet.jsp</result>
+		</action>
+		<action name="adminDateTimeFormatSet" class="adminDateTimeFormatSetAction">
+			<result name="input">/WEB-INF/admin/dateTimeFormatSet.jsp</result>
+		</action>
+		<action name="adminCookiePassSet" class="adminCookiePassSetAction">
+			<result name="input">/WEB-INF/admin/cookiePassSet.jsp</result>
+		</action>
+		<action name="adminScreenSet" class="adminScreenSetAction">
+			<result name="input">/WEB-INF/admin/screenSet.jsp</result>
+		</action>
+		<action name="adminEmailSet" class="adminEmailSetAction">
+			<result name="input">/WEB-INF/admin/emailSet.jsp</result>
+		</action>
+		<action name="adminUserRegSet" class="adminUserRegSetAction">
+			<result name="input">/WEB-INF/admin/userRegSet.jsp</result>
+		</action>
+		<action name="adminUserProSet" class="adminUserProSetAction">
+			<result name="input">/WEB-INF/admin/userProSet.jsp</result>
+		</action>
+		<action name="adminFaceSet" class="adminFaceSetAction">
+			<result name="input">/WEB-INF/admin/faceSet.jsp</result>
+		</action>
+		<action name="adminForbidSet" class="adminForbidSetAction">
+			<result name="input">/WEB-INF/admin/forbidSet.jsp</result>
+		</action>
+		<action name="adminPostSet" class="adminPostSetAction">
+			<result name="input">/WEB-INF/admin/postSet.jsp</result>
+		</action>
+		<action name="adminAttachSet" class="adminAttachSetAction">
+			<result name="input">/WEB-INF/admin/attachSet.jsp</result>
+		</action>
+		<action name="adminVoteSet" class="adminVoteSetAction">
+			<result name="input">/WEB-INF/admin/voteSet.jsp</result>
+		</action>
+		<action name="adminPmSet" class="adminPmSetAction">
+			<result name="input">/WEB-INF/admin/pmSet.jsp</result>
+		</action>
+		<action name="adminForumViewSet" class="adminForumViewSetAction">
+			<result name="input">/WEB-INF/admin/forumViewSet.jsp</result>
+		</action>
+		<action name="adminPostViewSet" class="adminPostViewSetAction">
+			<result name="input">/WEB-INF/admin/postViewSet.jsp</result>
+		</action>
+		<action name="adminPostHiddenSet" class="adminPostHiddenSetAction">
+			<result name="input">/WEB-INF/admin/postHiddenSet.jsp</result>
+		</action>
+		<action name="adminUOTimeSet" class="adminUOTimeSetAction">
+			<result name="input">/WEB-INF/admin/userOnlineTimeSet.jsp</result>
+		</action>
+		<action name="adminUserLevel" class="adminUserLevelAction">
+			<result name="userlevel" type="dispatcher">/WEB-INF/admin/userLevel.jsp</result>
+			<result name="input">/WEB-INF/admin/userLevelSet.jsp</result>
+			<result name="success" type="redirect-action">adminUserLevel?action=index&amp;levelType=${levelType}</result>
+		</action>
+		<action name="adminBoardList" class="adminBoardListAction">
+			<result name="boardList" type="dispatcher">/WEB-INF/admin/boardList.jsp</result>
+		</action>
+		<action name="adminBoardSet" class="adminBoardSetAction">
+			<result name="input">/WEB-INF/admin/boardSet.jsp</result>
+			<result name="success" type="redirect-action">adminBoardList</result>
+		</action>
+		<action name="adminBML" class="adminBoardMasterListAction">
+			<result name="success">/WEB-INF/admin/bmlist.jsp</result>
+		</action>
+		<action name="adminBmSet" class="adminBoardMasterSetAction">
+			<result name="input">/WEB-INF/admin/boardMasterSet.jsp</result>
+		</action>
+		<action name="adminBoardTag" class="adminBoardTagAction">
+			<result name="list">/WEB-INF/admin/boardTags.jsp</result>
+			<result name="input">/WEB-INF/admin/boardTagSet.jsp</result>
+		</action>
+		<action name="adminBoardUg" class="adminBoardUgAction">
+			<result name="list">/WEB-INF/admin/ugBoardList.jsp</result>
+			<result name="ugBoardPermissionList">/WEB-INF/admin/ugBoardPermissionList.jsp</result>
+		</action>
+		<action name="adminPermission" class="adminPermissionAction">
+			<result name="list">/WEB-INF/admin/permissionList.jsp</result>
+			<result name="input">/WEB-INF/admin/permissionSet.jsp</result>
+			<result name="success" type="redirect-action">adminPermission?action=list</result>
+		</action>
+		<action name="adminRoleSet" class="adminRoleAction">
+			<result name="index">/WEB-INF/admin/roleIndex.jsp</result>
+			<result name="list">/WEB-INF/admin/roleList.jsp</result>
+			<result name="roleSet">/WEB-INF/admin/roleSet.jsp</result>
+		</action>
+		<action name="adminUgSet" class="adminUgSetAction">
+			<result name="index">/WEB-INF/admin/ugIndex.jsp</result>
+			<result name="list">/WEB-INF/admin/ugList.jsp</result>
+			<result name="ugSet">/WEB-INF/admin/ugSet.jsp</result>
+		</action>
+		<action name="adminUserSearch" class="adminUserSearchAction">
+			<result name="input">/WEB-INF/admin/search.jsp</result>
+			<result name="success">/WEB-INF/admin/adminUserInfo.jsp</result>
+		</action>
+	</package>
+	<package name="main" extends="bbscs-default" namespace="/">
+		<default-interceptor-ref name="userAuthInterceptorStack"></default-interceptor-ref>
+		<action name="main" class="com.laoer.bbscs.web.action.Main">
+			<result name="success" type="redirect-action">in</result>
+		</action>
+		<action name="nag" class="nagAction">
+		    <interceptor-ref name="userAuthInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="userSessionInterceptor"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/nag.jsp</result>
+		</action>
+		<action name="logout" class="logoutAction">
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginInterceptor"></interceptor-ref>
+			<interceptor-ref name="userSessionInterceptor"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="success" type="redirect">${logoutUrl}</result>
+		</action>
+		<action name="signSet" class="signSetAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/signSet.jsp</result>
+			<result name="input">/WEB-INF/jsp/signEdit.jsp</result>
+		</action>
+		<action name="nickNameSet" class="nickNameSetAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="input">/WEB-INF/jsp/nickNameSet.jsp</result>
+		</action>
+		<action name="userConfig" class="userConfigSetAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="input">/WEB-INF/jsp/userConfig.jsp</result>
+		</action>
+		<action name="friendSet" class="friendSetAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/friendSet.jsp</result>
+			<result name="flist">/WEB-INF/jsp/friendList.jsp</result>
+			<result name="input">/WEB-INF/jsp/friendAdd.jsp</result>
+		</action>
+		<action name="note" class="noteAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/note.jsp</result>
+			<result name="noteInbox">/WEB-INF/jsp/noteInbox.jsp</result>
+			<result name="noteOutbox">/WEB-INF/jsp/noteOutbox.jsp</result>
+			<result name="input">/WEB-INF/jsp/noteSend.jsp</result>
+			<result name="noteReadInbox">/WEB-INF/jsp/noteReadInbox.jsp</result>
+		</action>
+		<action name="bookMark" class="bookMarkAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/bookMark.jsp</result>
+			<result name="list">/WEB-INF/jsp/bookMarkList.jsp</result>
+			<result name="input">/WEB-INF/jsp/bookMarkAddEdit.jsp</result>
+		</action>
+		<action name="userFace" class="userFaceAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/userFaceEdit.jsp</result>
+			<result name="showface">/WEB-INF/jsp/showface.jsp</result>
+			<result name="userFaceUpPage">/WEB-INF/jsp/userFaceUpPage.jsp</result>
+			<result name="userFaceUpComponent">/WEB-INF/jsp/userFaceUpComponent.jsp</result>
+		</action>
+		<action name="userDetailSet" class="userDetailSetAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			<result name="input">/WEB-INF/jsp/userDetailSet.jsp</result>
+		</action>
+		<action name="cpasswd" class="cpasswdAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="input">/WEB-INF/jsp/cpasswd.jsp</result>
+			<result name="passcpasswd" type="redirect">
+				${sysConfig.getPassChangeUrl()}
+			</result>
+		</action>
+		<action name="boardSaveManage" class="boardSaveManageAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/boardSaveManage.jsp</result>
+			<result name="list" type="redirect-action">boardSaveManage?action=index</result>
+		</action>
+		<action name="userInfo" class="userInfoAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/showUserInfo.jsp</result>
+			<result name="bookMarkInUserInfo">/WEB-INF/jsp/bookMarkInUserInfo.jsp</result>
+		</action>
+		<action name="in" class="inAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/main.jsp</result>
+		</action>
+		<action name="online" class="onlineAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/onlineList.jsp</result>
+		</action>
+		<action name="userShow" class="userShowAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/userShow.jsp</result>
+			<result name="userShowList">/WEB-INF/jsp/userShowList.jsp</result>
+		</action>
+		<action name="sysNumStat" class="sysNumStatAction">
+			<interceptor-ref name="mainUserAuthInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/sysNumStat.jsp</result>
+		</action>
+	</package>
+	<package name="forum" extends="bbscs-default" namespace="/">
+		<default-interceptor-ref name="boardInterceptorStack"></default-interceptor-ref>
+		<action name="forum" class="forumAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="forumBoard">/WEB-INF/jsp/forumBoard.jsp</result>
+			<result name="forum">/WEB-INF/jsp/forum.jsp</result>
+			<result name="forumHistory">/WEB-INF/jsp/forumHistory.jsp</result>
+		</action>
+		<action name="post" class="postAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="input">/WEB-INF/jsp/post.jsp</result>
+			<result name="success" type="redirect">${forwardUrl}</result>
+			<result name="upfileInPost">/WEB-INF/jsp/upfileInPost.jsp</result>
+			<result name="upfileInput">/WEB-INF/jsp/upfileInput.jsp</result>
+			<result name="forumUpComponent">/WEB-INF/jsp/forumUpComponent.jsp</result>
+			<result name="attachFiles">/WEB-INF/jsp/attachFiles.jsp</result>
+		</action>
+		<action name="read" class="readAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="read">/WEB-INF/jsp/read.jsp</result>
+			<result name="readHistory">/WEB-INF/jsp/readHistory.jsp</result>
+			<result name="postSummary">/WEB-INF/jsp/postSummary.jsp</result>
+			<result name="postShowIpInfo">/WEB-INF/jsp/postShowIpInfo.jsp</result>
+			<result name="showUpFileInPost">/WEB-INF/jsp/showUpFileInPost.jsp</result>
+			<result name="showAttach">/WEB-INF/jsp/showAttach.jsp</result>
+			<result name="showVoteInPost">/WEB-INF/jsp/showVoteInPost.jsp</result>
+			<result name="readWaste">/WEB-INF/jsp/readWaste.jsp</result>
+			<result name="readAuditing">/WEB-INF/jsp/readAuditing.jsp</result>
+			<result name="readElite">/WEB-INF/jsp/readElite.jsp</result>
+		</action>
+		<action name="delAttach" class="delAttachAction">
+		</action>
+		<action name="votePost" class="votePostAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="input">/WEB-INF/jsp/votePost.jsp</result>
+			<result name="success" type="redirect">${forwardUrl}</result>
+		</action>
+		<action name="voteOpt" class="voteOptAction">
+		</action>
+		<action name="postOpt" class="postOptAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+		</action>
+		<action name="moveForum" class="moveForumAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="input">/WEB-INF/jsp/movePage.jsp</result>
+			<result name="success" type="redirect">${forwardUrl}</result>
+		</action>
+		<action name="boardSave" class="boardSaveAction">
+		</action>
+		<action name="subs" class="subsAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="subsmy">/WEB-INF/jsp/subsmy.jsp</result>
+			<result name="list">/WEB-INF/jsp/subsList.jsp</result>
+		</action>
+		<action name="forumManage" class="forumManageAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="remoteAddrInterceptor"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="forumManage">/WEB-INF/jsp/forumManage.jsp</result>
+			<result name="forumWaste">/WEB-INF/jsp/forumWaste.jsp</result>
+			<result name="forumAuditing">/WEB-INF/jsp/forumAuditing.jsp</result>
+			<result name="success" type="redirect">${forwardUrl}</result>
+		</action>
+		<action name="postWaitAudit" class="postWaitAuditAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/postWaitAudit.jsp</result>
+		</action>
+		<action name="manageAdvance" class="manageAdvanceAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/manageAdvance.jsp</result>
+		</action>
+		<action name="forumSearch" class="forumSearchAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/forumSearch.jsp</result>
+		</action>
+		<action name="refine" class="refineAction">
+			<interceptor-ref name="boardInterceptorStack"></interceptor-ref>
+			<result name="refine">/WEB-INF/jsp/refine.jsp</result>
+			<result name="refineManage">/WEB-INF/jsp/refineManage.jsp</result>
+			<result name="success" type="redirect">${forwardUrl}</result>
+		</action>
+	
+		
+	</package>
+	<package name="special" extends="bbscs-default" namespace="/">
+	    <action name="boardPasswd" class="boardPasswdAction">
+			<interceptor-ref name="userSessionInterceptorStack"></interceptor-ref>
+			<interceptor-ref name="requestBasePathInterceptor"></interceptor-ref>
+			<result name="success" type="redirect">${forwardUrl}</result>
+		</action>
+	</package>
+	
+	<package name="image" extends="bbscs-default" namespace="/">
+		<action name="getAlllotno" class="imageAction" method="getAll">
+		<result name="success">/WEB-INF/jsp/upload/adImageupload.jsp</result>
+		</action>
+		
+		<action name="imageupload" class="imageAction" method="upload">
+		 <result name="success"> /WEB-INF/jsp/upload/success.jsp</result>
+		 <result name="error"> /WEB-INF/jsp/upload/error.jsp</result>
+		</action>
+	</package>
+	<package name="create" extends="bbscs-default" namespace="/">
+		<action name="toCreate" class="userInfoAction" method="reCreateUserProFile">
+			<result name="createPage">/WEB-INF/jsp/reCreateUserMsg.jsp</result>
+		</action>
+	</package>
+</struts>

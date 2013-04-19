@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Role" table="bbscs_role">
+    <id name="id" column="ID" type="int" unsaved-value="null">
+      <generator class="sequence">
+        <param name="sequence">SEQ_ROLE_ID</param>
+      </generator>
+    </id>
+    <property column="RoleName" length="255" name="roleName" not-null="true" type="string"/>
+    <property column="TypeID" length="2" name="typeID" not-null="true" type="int"/>
+    <property column="Permissions" name="permissions" type="com.laoer.bbscs.ext.hibernate.SplitList"/>
+  </class>
+</hibernate-mapping>

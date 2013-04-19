@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="BoardTag" table="bbscs_boardtag">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="TagName" length="255" name="tagName" not-null="true" type="string"/>
+    <property column="Orders" length="11" name="orders" type="int"/>
+    <many-to-one name="board" column="BoardID" class="Board"/>
+  </class>
+</hibernate-mapping>

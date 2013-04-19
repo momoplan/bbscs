@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:init.properties</value>
+		</property>
+	</bean>
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" dependency-check="none">
+		<property name="driverClass">
+			<value>${datasource.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/laoer/bbscs/bean/UserInfo.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/UserDetail.hbm.xml</value>
+				<value>
+					com/laoer/bbscs/bean/Config-${datasource.type}.hbm.xml
+				</value>
+				<value>
+					com/laoer/bbscs/bean/Board-${datasource.type}.hbm.xml
+				</value>
+				<value>
+					com/laoer/bbscs/bean/BoardMaster-${datasource.type}.hbm.xml
+				</value>
+				<value>com/laoer/bbscs/bean/BoardTag.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/Permission.hbm.xml</value>
+				<value>
+					com/laoer/bbscs/bean/Role-${datasource.type}.hbm.xml
+				</value>
+				<value>
+					com/laoer/bbscs/bean/UserGroup-${datasource.type}.hbm.xml
+				</value>
+				<value>com/laoer/bbscs/bean/UserOnline.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/LoginError.hbm.xml</value>
+				<value>
+					com/laoer/bbscs/bean/BoardPermission.hbm.xml
+				</value>
+				<value>com/laoer/bbscs/bean/UserLevel.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/BoardSave.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/Friend.hbm.xml</value>
+				<value>
+					com/laoer/bbscs/bean/Note-${datasource.type}.hbm.xml
+				</value>
+				<value>com/laoer/bbscs/bean/BookMark.hbm.xml</value>
+				<value>
+					com/laoer/bbscs/bean/ForumMain-${datasource.type}.hbm.xml
+				</value>
+				<value>
+					com/laoer/bbscs/bean/ForumHistory-${datasource.type}.hbm.xml
+				</value>
+				<value>com/laoer/bbscs/bean/Subscibe.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/Vote.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/VoteItem.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/VoteUser.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/AgreeAgainst.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/Commend.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/ForumBuy.hbm.xml</value>
+				<value>
+					com/laoer/bbscs/bean/BoardAuthUser.hbm.xml
+				</value>
+				<value>com/laoer/bbscs/bean/SysNumStat.hbm.xml</value>
+				<value>com/laoer/bbscs/bean/UserTop.hbm.xml</value>
+				<value>
+					com/laoer/bbscs/bean/Elite-${datasource.type}.hbm.xml
+				</value>
+				<value>
+				  com/laoer/bbscs/bean/Image.hbm.xml
+				
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					${hibernate.dialect}
+				</prop>
+				<prop key="hibernate.jdbc.fetch_size">
+					${hibernate.jdbc.fetch_size}
+				</prop>
+				<prop key="hibernate.jdbc.batch_size">
+					${hibernate.jdbc.batch_size}
+				</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="myTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>com.laoer.bbscs.web.action.BaseAction</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="sysOptionsValues"
+		class="com.laoer.bbscs.comm.SysOptionsValues">
+		<property name="messageSource">
+			<ref bean="messageSource" />
+		</property>
+	</bean>
+	<bean id="sysConfig"
+		class="com.laoer.bbscs.service.config.SysConfig">
+		<constructor-arg>
+			<ref bean="configService" />
+		</constructor-arg>
+		<property name="isLoad">
+			<value>${bbscs.isloadconfig}</value>
+		</property>
+	</bean>
+	<bean id="userConfig"
+		class="com.laoer.bbscs.service.config.UserConfig">
+		<property name="safePath">
+			<value>${bbscs.safePath}</value>
+		</property>
+	</bean>
+	<bean id="forumConfig"
+		class="com.laoer.bbscs.service.config.ForumConfig">
+		<property name="safePath">
+			<value>${bbscs.safePath}</value>
+		</property>
+	</bean>
+	<bean id="sysStatService"
+		class="com.laoer.bbscs.service.imp.SysStatServiceImp"
+		scope="prototype">
+		<property name="userConfig">
+			<ref bean="userConfig" />
+		</property>
+	</bean>
+	<bean id="userPermissionCache"
+		class="com.laoer.bbscs.service.imp.OsCacheImp">
+		<constructor-arg>
+			<value>${cacheup.config}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="sysListObjCache"
+		class="com.laoer.bbscs.service.imp.OsCacheImp">
+		<constructor-arg>
+			<value>${cachelist.config}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="boardCache"
+		class="com.laoer.bbscs.service.imp.OsCacheImp">
+		<constructor-arg>
+			<value>${cache.config}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="postCache"
+		class="com.laoer.bbscs.service.imp.OsCacheImp">
+		<constructor-arg>
+			<value>${cachepost.config}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="ipSeeker" class="com.laoer.bbscs.comm.IPSeeker"></bean>
+	<bean id="ajaxMessagesJson"
+		class="com.laoer.bbscs.web.ajax.AjaxMessagesJson" scope="prototype">
+	</bean>
+	<bean id="templateMail"
+		class="com.laoer.bbscs.service.mail.TemplateMail" scope="prototype"
+		init-method="init">
+		<property name="sysConfig">
+			<ref bean="sysConfig" />
+		</property>
+	</bean>
+	<bean id="userInfoFileIO"
+		class="com.laoer.bbscs.fio.imp.UserInfoFileIOImp">
+		<property name="userConfig">
+			<ref bean="userConfig" />
+		</property>
+		<property name="sysConfig">
+			<ref bean="sysConfig" />
+		</property>
+	</bean>
+	<bean id="forumUploadFile"
+		class="com.laoer.bbscs.fio.imp.ForumUploadFileImp" >
+		<property name="forumConfig">
+			<ref bean="forumConfig" />
+		</property>
+	</bean>
+	<bean id="commendFileIO"
+		class="com.laoer.bbscs.fio.imp.CommendFileIOImp" />
+	<bean id="subscibeQueue" class="com.laoer.bbscs.comm.SysQueue" />
+	<bean id="tempConfiguration"
+		class="freemarker.template.Configuration" scope="prototype" />
+	<bean id="userInfoDAO"
+		class="com.laoer.bbscs.dao.hibernate.UserInfoHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="configDAO"
+		class="com.laoer.bbscs.dao.hibernate.ConfigHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="boardDAO"
+		class="com.laoer.bbscs.dao.hibernate.BoardHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="boardPermissionDAO"
+		class="com.laoer.bbscs.dao.hibernate.BoardPermissionHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="permissionDAO"
+		class="com.laoer.bbscs.dao.hibernate.PermissionHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="roleDAO"
+		class="com.laoer.bbscs.dao.hibernate.RoleHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="userGroupDAO"
+		class="com.laoer.bbscs.dao.hibernate.UserGroupHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="userOnlineDAO"
+		class="com.laoer.bbscs.dao.hibernate.UserOnlineHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="loginErrorDAO"
+		class="com.laoer.bbscs.dao.hibernate.LoginErrorHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="userLevelDAO"
+		class="com.laoer.bbscs.dao.hibernate.UserLevelHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="boardSaveDAO"
+		class="com.laoer.bbscs.dao.hibernate.BoardSaveHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="friendDAO"
+		class="com.laoer.bbscs.dao.hibernate.FriendHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="noteDAO"
+		class="com.laoer.bbscs.dao.hibernate.NoteHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="bookMarkDAO"
+		class="com.laoer.bbscs.dao.hibernate.BookMarkHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="forumMainDAO"
+		class="com.laoer.bbscs.dao.hibernate.ForumHibernateDAO">
+		<constructor-arg>
+			<value>Main</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="forumHistoryDAO"
+		class="com.laoer.bbscs.dao.hibernate.ForumHibernateDAO">
+		<constructor-arg>
+			<value>History</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="subscibeDAO"
+		class="com.laoer.bbscs.dao.hibernate.SubscibeHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="voteDAO"
+		class="com.laoer.bbscs.dao.hibernate.VoteHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="voteItemDAO"
+		class="com.laoer.bbscs.dao.hibernate.VoteItemHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="voteUserDAO"
+		class="com.laoer.bbscs.dao.hibernate.VoteUserHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="forumBuyDAO"
+		class="com.laoer.bbscs.dao.hibernate.ForumBuyHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="agreeAgainstDAO"
+		class="com.laoer.bbscs.dao.hibernate.AgreeAgainstHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="commendDAO"
+		class="com.laoer.bbscs.dao.hibernate.CommendHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="boardAuthUserDAO"
+		class="com.laoer.bbscs.dao.hibernate.BoardAuthUserHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="sysNumStatDAO"
+		class="com.laoer.bbscs.dao.hibernate.SysNumStatHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="userTopDAO"
+		class="com.laoer.bbscs.dao.hibernate.UserTopHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="eliteDAO"
+		class="com.laoer.bbscs.dao.hibernate.EliteHibernateDAO">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="forumArchivesDAO"
+		class="com.laoer.bbscs.dao.jdbc.ForumArchivesJDBCDAO">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+	</bean>
+	<bean id="txProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="create*">
+					PROPAGATION_REQUIRED,-com.laoer.bbscs.exception.BbscsException
+				</prop>
+				<prop key="save*">
+					PROPAGATION_REQUIRED,-com.laoer.bbscs.exception.BbscsException
+				</prop>
+				<prop key="remove*">
+					PROPAGATION_REQUIRED,-com.laoer.bbscs.exception.BbscsException
+				</prop>
+				<prop key="update*">
+					PROPAGATION_REQUIRED,-com.laoer.bbscs.exception.BbscsException
+				</prop>
+				<prop key="del*">
+					PROPAGATION_REQUIRED,-com.laoer.bbscs.exception.BbscsException
+				</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="userTarget"
+		class="com.laoer.bbscs.service.imp.UserServiceImp">
+		<property name="userInfoDAO">
+			<ref local="userInfoDAO" />
+		</property>
+		<property name="userInfoFileIO">
+			<ref local="userInfoFileIO" />
+		</property>
+		<property name="userGroupDAO">
+			<ref local="userGroupDAO" />
+		</property>
+		<property name="permissionDAO">
+			<ref local="permissionDAO" />
+		</property>
+		<property name="userPermissionCache">
+			<ref local="userPermissionCache" />
+		</property>
+		<property name="userLevelService">
+			<ref local="userLevelService" />
+		</property>
+	</bean>
+	<bean id="configTarget"
+		class="com.laoer.bbscs.service.imp.ConfigServiceImp">
+		<property name="configDAO">
+			<ref local="configDAO" />
+		</property>
+	</bean>
+	<bean id="permissionServiceTarget"
+		class="com.laoer.bbscs.service.imp.PermissionServiceImp">
+		<property name="permissionDAO">
+			<ref local="permissionDAO" />
+		</property>
+
+		<property name="userPermissionCache">
+			<ref local="userPermissionCache" />
+		</property>
+	</bean>
+	<bean id="roleServiceTarget"
+		class="com.laoer.bbscs.service.imp.RoleServiceImp">
+		<property name="roleDAO">
+			<ref local="roleDAO" />
+		</property>
+		<property name="userPermissionCache">
+			<ref local="userPermissionCache" />
+		</property>
+	</bean>
+	<bean id="userGroupServiceTarget"
+		class="com.laoer.bbscs.service.imp.UserGroupServiceImp">
+		<property name="userGroupDAO">
+			<ref local="userGroupDAO" />
+		</property>
+		<property name="boardDAO">
+			<ref local="boardDAO" />
+		</property>
+		<property name="boardPermissionDAO">
+			<ref local="boardPermissionDAO" />
+		</property>
+		<property name="userPermissionCache">
+			<ref local="userPermissionCache" />
+		</property>
+	</bean>
+	<bean id="userOnlineServiceTarget"
+		class="com.laoer.bbscs.service.imp.UserOnlineServiceImp">
+		<property name="userOnlineDAO">
+			<ref local="userOnlineDAO" />
+		</property>
+	</bean>
+	<bean id="loginErrorServiceTarget"
+		class="com.laoer.bbscs.service.imp.LoginErrorServiceImp">
+		<property name="loginErrorDAO">
+			<ref local="loginErrorDAO" />
+		</property>
+	</bean>
+	<bean id="userLevelServiceTarget"
+		class="com.laoer.bbscs.service.imp.UserLevelServiceImp">
+		<property name="userLevelDAO">
+			<ref local="userLevelDAO" />
+		</property>
+		<property name="sysListObjCache">
+			<ref local="sysListObjCache" />
+		</property>
+	</bean>
+	<bean id="boardTarget"
+		class="com.laoer.bbscs.service.imp.BoardServiceCacheImp">
+		<property name="boardDAO">
+			<ref local="boardDAO" />
+		</property>
+		<property name="boardPermissionDAO">
+			<ref local="boardPermissionDAO" />
+		</property>
+		<property name="userGroupDAO">
+			<ref local="userGroupDAO" />
+		</property>
+		<property name="permissionDAO">
+			<ref local="permissionDAO" />
+		</property>
+		<property name="roleDAO">
+			<ref local="roleDAO" />
+		</property>
+		<property name="boardCache">
+			<ref local="boardCache" />
+		</property>
+		<property name="userPermissionCache">
+			<ref local="userPermissionCache" />
+		</property>
+		<property name="sysListObjCache">
+			<ref local="sysListObjCache" />
+		</property>
+		<property name="forumDAO">
+			<ref local="forumMainDAO" />
+		</property>
+		<property name="forumHistoryDAO">
+			<ref local="forumHistoryDAO" />
+		</property>
+		<property name="sysStatService">
+			<ref local="sysStatService" />
+		</property>
+	</bean>
+	<bean id="boardPermissionServiceTarget"
+		class="com.laoer.bbscs.service.imp.BoardPermissionServiceImp">
+		<property name="boardPermissionDAO">
+			<ref local="boardPermissionDAO" />
+		</property>
+		<property name="userPermissionCache">
+			<ref local="userPermissionCache" />
+		</property>
+	</bean>
+	<bean id="boardSaveServiceTarget"
+		class="com.laoer.bbscs.service.imp.BoardSaveServiceImp">
+		<property name="boardSaveDAO">
+			<ref local="boardSaveDAO" />
+		</property>
+	</bean>
+	<bean id="friendServiceTarget"
+		class="com.laoer.bbscs.service.imp.FriendServiceImp">
+		<property name="friendDAO">
+			<ref local="friendDAO" />
+		</property>
+		<property name="userConfig">
+			<ref local="userConfig" />
+		</property>
+	</bean>
+	<bean id="noteServiceTarget"
+		class="com.laoer.bbscs.service.imp.NoteServiceImp">
+		<property name="noteDAO">
+			<ref local="noteDAO" />
+		</property>
+	</bean>
+	<bean id="bookMarkServiceTarget"
+		class="com.laoer.bbscs.service.imp.BookMarkServiceImp">
+		<property name="bookMarkDAO">
+			<ref local="bookMarkDAO" />
+		</property>
+	</bean>
+	<bean id="forumServiceTarget"
+		class="com.laoer.bbscs.service.imp.ForumServiceImp">
+		<property name="forumDAO">
+			<ref local="forumMainDAO" />
+		</property>
+		<property name="userInfoDAO">
+			<ref local="userInfoDAO" />
+		</property>
+		<property name="forumUploadFile">
+			<ref local="forumUploadFile" />
+		</property>
+		<property name="sysListObjCache">
+			<ref local="sysListObjCache" />
+		</property>
+		<property name="sysConfig">
+			<ref local="sysConfig" />
+		</property>
+		<property name="userInfoFileIO">
+			<ref local="userInfoFileIO" />
+		</property>
+		<property name="subscibeFactory">
+			<ref local="subscibeFactory" />
+		</property>
+		<property name="subscibeDAO">
+			<ref local="subscibeDAO" />
+		</property>
+		<property name="boardDAO">
+			<ref local="boardDAO" />
+		</property>
+		<property name="subscibeQueue">
+			<ref local="subscibeQueue" />
+		</property>
+		<property name="forumBuyDAO">
+			<ref local="forumBuyDAO" />
+		</property>
+		<property name="voteDAO">
+			<ref local="voteDAO" />
+		</property>
+		<property name="voteItemDAO">
+			<ref local="voteItemDAO" />
+		</property>
+		<property name="commendDAO">
+			<ref local="commendDAO" />
+		</property>
+		<property name="commendFileIO">
+			<ref local="commendFileIO" />
+		</property>
+		<property name="forumHistoryDAO">
+			<ref local="forumHistoryDAO" />
+		</property>
+		<property name="forumConfig">
+			<ref local="forumConfig" />
+		</property>
+		<property name="postCache">
+			<ref local="postCache" />
+		</property>
+	</bean>
+	<bean id="forumHistoryServiceTarget"
+		class="com.laoer.bbscs.service.imp.ForumServiceImp">
+		<property name="forumDAO">
+			<ref local="forumHistoryDAO" />
+		</property>
+		<property name="userInfoDAO">
+			<ref local="userInfoDAO" />
+		</property>
+		<property name="forumUploadFile">
+			<ref local="forumUploadFile" />
+		</property>
+		<property name="sysListObjCache">
+			<ref local="sysListObjCache" />
+		</property>
+		<property name="sysConfig">
+			<ref local="sysConfig" />
+		</property>
+		<property name="userInfoFileIO">
+			<ref local="userInfoFileIO" />
+		</property>
+		<property name="subscibeFactory">
+			<ref local="subscibeFactory" />
+		</property>
+		<property name="subscibeDAO">
+			<ref local="subscibeDAO" />
+		</property>
+		<property name="boardDAO">
+			<ref local="boardDAO" />
+		</property>
+		<property name="subscibeQueue">
+			<ref local="subscibeQueue" />
+		</property>
+		<property name="forumBuyDAO">
+			<ref local="forumBuyDAO" />
+		</property>
+		<property name="voteDAO">
+			<ref local="voteDAO" />
+		</property>
+		<property name="voteItemDAO">
+			<ref local="voteItemDAO" />
+		</property>
+		<property name="commendDAO">
+			<ref local="commendDAO" />
+		</property>
+		<property name="commendFileIO">
+			<ref local="commendFileIO" />
+		</property>
+	</bean>
+	<bean id="subscibeServiceTarget"
+		class="com.laoer.bbscs.service.imp.SubscibeServiceImp">
+		<property name="subscibeDAO">
+			<ref local="subscibeDAO" />
+		</property>
+	</bean>
+	<bean id="voteServiceTarget"
+		class="com.laoer.bbscs.service.imp.VoteServiceImp">
+		<property name="voteDAO">
+			<ref local="voteDAO" />
+		</property>
+	</bean>
+	<bean id="voteItemServiceTarget"
+		class="com.laoer.bbscs.service.imp.VoteItemServiceImp">
+		<property name="voteItemDAO">
+			<ref local="voteItemDAO" />
+		</property>
+		<property name="voteUserDAO">
+			<ref local="voteUserDAO" />
+		</property>
+	</bean>
+	<bean id="voteUserServiceTarget"
+		class="com.laoer.bbscs.service.imp.VoteUserServiceImp">
+		<property name="voteUserDAO">
+			<ref local="voteUserDAO" />
+		</property>
+	</bean>
+	<bean id="agreeAgainstServiceTarget"
+		class="com.laoer.bbscs.service.imp.AgreeAgainstServiceImp">
+		<property name="agreeAgainstDAO">
+			<ref local="agreeAgainstDAO" />
+		</property>
+	</bean>
+	<bean id="commendServiceTarget"
+		class="com.laoer.bbscs.service.imp.CommendServiceImp">
+		<property name="commendDAO">
+			<ref local="commendDAO" />
+		</property>
+		<property name="forumDAO">
+			<ref local="forumMainDAO" />
+		</property>
+		<property name="commendFileIO">
+			<ref local="commendFileIO" />
+		</property>
+		<property name="sysListObjCache">
+			<ref local="sysListObjCache" />
+		</property>
+	</bean>
+	<bean id="boardAuthUserServiceTarget"
+		class="com.laoer.bbscs.service.imp.BoardAuthUserServiceImp">
+		<property name="boardAuthUserDAO">
+			<ref local="boardAuthUserDAO" />
+		</property>
+	</bean>
+	<bean id="sysNumStatServiceTarget"
+		class="com.laoer.bbscs.service.imp.SysNumStatServiceImp">
+		<property name="sysNumStatDAO">
+			<ref local="sysNumStatDAO" />
+		</property>
+	</bean>
+	<bean id="userTopServiceTarget"
+		class="com.laoer.bbscs.service.imp.UserTopServiceImp">
+		<property name="userTopDAO">
+			<ref local="userTopDAO" />
+		</property>
+		<property name="userInfoDAO">
+			<ref local="userInfoDAO" />
+		</property>
+	</bean>
+	<bean id="eliteServiceTarget"
+		class="com.laoer.bbscs.service.imp.EliteServiceImp">
+		<property name="eliteDAO">
+			<ref local="eliteDAO" />
+		</property>
+		<property name="forumDAO">
+			<ref local="forumMainDAO" />
+		</property>
+	</bean>
+	<bean id="forumArchivesServiceTarget"
+		class="com.laoer.bbscs.service.imp.ForumArchivesServiceImp">
+		<property name="forumHistoryDAO">
+			<ref bean="forumHistoryDAO" />
+		</property>
+		<property name="forumArchivesDAO">
+			<ref bean="forumArchivesDAO" />
+		</property>
+		<property name="boardService">
+			<ref bean="boardService" />
+		</property>
+		<property name="tempConfiguration">
+			<ref bean="tempConfiguration" />
+		</property>
+		<property name="forumConfig">
+			<ref bean="forumConfig" />
+		</property>
+		<property name="sysConfig">
+			<ref bean="sysConfig" />
+		</property>
+	</bean>
+	<!--  -->
+	<bean id="userService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="userTarget" />
+		</property>
+	</bean>
+	<bean id="configService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="configTarget" />
+		</property>
+	</bean>
+	<bean id="permissionService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="permissionServiceTarget" />
+		</property>
+	</bean>
+	<bean id="roleService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="roleServiceTarget" />
+		</property>
+	</bean>
+	<bean id="userGroupService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="userGroupServiceTarget" />
+		</property>
+	</bean>
+	<bean id="userOnlineService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="userOnlineServiceTarget" />
+		</property>
+	</bean>
+	<bean id="loginErrorService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="loginErrorServiceTarget" />
+		</property>
+	</bean>
+	<bean id="userLevelService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="userLevelServiceTarget" />
+		</property>
+	</bean>
+	<bean id="boardService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="boardTarget" />
+		</property>
+	</bean>
+	<bean id="boardPermissionService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="boardPermissionServiceTarget" />
+		</property>
+	</bean>
+	<bean id="boardSaveService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="boardSaveServiceTarget" />
+		</property>
+	</bean>
+	<bean id="friendService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="friendServiceTarget" />
+		</property>
+	</bean>
+	<bean id="bookMarkService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="bookMarkServiceTarget" />
+		</property>
+	</bean>
+	<bean id="forumService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="forumServiceTarget" />
+		</property>
+	</bean>
+	<bean id="forumHistoryService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="forumHistoryServiceTarget" />
+		</property>
+	</bean>
+	<bean id="subscibeService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="subscibeServiceTarget" />
+		</property>
+	</bean>
+	<bean id="voteService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="voteServiceTarget" />
+		</property>
+	</bean>
+	<bean id="voteItemService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="voteItemServiceTarget" />
+		</property>
+	</bean>
+	<bean id="voteUserService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="voteUserServiceTarget" />
+		</property>
+	</bean>
+	<bean id="agreeAgainstService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="agreeAgainstServiceTarget" />
+		</property>
+	</bean>
+	<bean id="commendService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="commendServiceTarget" />
+		</property>
+	</bean>
+	<bean id="boardAuthUserService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="boardAuthUserServiceTarget" />
+		</property>
+	</bean>
+	<bean id="sysNumStatService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="sysNumStatServiceTarget" />
+		</property>
+	</bean>
+	<bean id="userTopService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="userTopServiceTarget" />
+		</property>
+	</bean>
+	<bean id="eliteService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="eliteServiceTarget" />
+		</property>
+	</bean>
+	<bean id="forumArchivesService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="forumArchivesServiceTarget" />
+		</property>
+	</bean>
+
+	<bean id="friendFactory"
+		class="com.laoer.bbscs.service.imp.FriendFactoryImp">
+	</bean>
+	<bean id="noteService" parent="txProxyTemplate">
+		<property name="target">
+			<ref bean="noteServiceTarget" />
+		</property>
+	</bean>
+	<bean id="noteFactory"
+		class="com.laoer.bbscs.service.imp.NoteFactoryImp">
+	</bean>
+	<bean id="bookMarkFactory"
+		class="com.laoer.bbscs.service.imp.BookMarkFactoryImp">
+	</bean>
+	<bean id="subscibeFactory"
+		class="com.laoer.bbscs.service.imp.SubscibeFactoryImp">
+	</bean>
+	<!--  -->
+	<bean id="boardCount"
+		class="com.laoer.bbscs.service.task.BoardCountTimerTask">
+		<property name="boardService">
+			<ref local="boardService" />
+		</property>
+		<property name="commendService">
+			<ref local="commendService" />
+		</property>
+	</bean>
+	<bean id="loginErrorClear"
+		class="com.laoer.bbscs.service.task.LoginErrorClearTimerTask">
+		<property name="loginErrorService">
+			<ref local="loginErrorService" />
+		</property>
+	</bean>
+	<bean id="voteUserClear"
+		class="com.laoer.bbscs.service.task.VoteUserClearTimerTask">
+		<property name="agreeAgainstService">
+			<ref local="agreeAgainstService" />
+		</property>
+		<property name="voteUserService">
+			<ref local="voteUserService" />
+		</property>
+	</bean>
+	<bean id="forumHistoryTimer"
+		class="com.laoer.bbscs.service.task.ForumHistoryTimerTask">
+		<property name="forumService">
+			<ref local="forumService" />
+		</property>
+		<property name="sysConfig">
+			<ref bean="sysConfig" />
+		</property>
+	</bean>
+	<bean id="userOnlineClear"
+		class="com.laoer.bbscs.service.task.UserOnlineClearTimerTask">
+		<property name="userOnlineService">
+			<ref local="userOnlineService" />
+		</property>
+	</bean>
+	<bean id="subscibeSend"
+		class="com.laoer.bbscs.service.task.SubscibeSendTimerTask">
+		<property name="subscibeService">
+			<ref local="subscibeService" />
+		</property>
+		<property name="subscibeQueue">
+			<ref local="subscibeQueue" />
+		</property>
+		<property name="noteFactory">
+			<ref local="noteFactory" />
+		</property>
+		<property name="noteService">
+			<ref bean="noteService" />
+		</property>
+		<property name="messageSource">
+			<ref bean="messageSource" />
+		</property>
+		<property name="templateMail">
+			<ref bean="templateMail" />
+		</property>
+		<property name="sysConfig">
+			<ref bean="sysConfig" />
+		</property>
+		<property name="boardService">
+			<ref bean="boardService" />
+		</property>
+		<property name="forumService">
+			<ref local="forumService" />
+		</property>
+	</bean>
+	<bean id="boardCountTimerTask"
+		class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay">
+			<value>10000</value>
+		</property>
+		<property name="period">
+			<value>1800000</value>
+		</property>
+		<property name="timerTask">
+			<ref local="boardCount" />
+		</property>
+	</bean>
+	<bean id="loginErrorClearTimerTask"
+		class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay">
+			<value>15000</value>
+		</property>
+		<property name="period">
+			<value>900000</value>
+		</property>
+		<property name="timerTask">
+			<ref local="loginErrorClear" />
+		</property>
+	</bean>
+	<bean id="voteUserClearTimerTask"
+		class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay">
+			<value>45000</value>
+		</property>
+		<property name="period">
+			<value>86400000</value>
+		</property>
+		<property name="timerTask">
+			<ref local="voteUserClear" />
+		</property>
+	</bean>
+	<bean id="forumHistoryTimerTask"
+		class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay">
+			<value>43200000</value>
+		</property>
+		<property name="period">
+			<value>43200000</value>
+		</property>
+		<property name="timerTask">
+			<ref local="forumHistoryTimer" />
+		</property>
+	</bean>
+	<bean id="userOnlineClearTimerTask"
+		class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay">
+			<value>3600000</value>
+		</property>
+		<property name="period">
+			<value>3600000</value>
+		</property>
+		<property name="timerTask">
+			<ref local="userOnlineClear" />
+		</property>
+	</bean>
+	<bean id="subscibeSendTimerTask"
+		class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay">
+			<value>300000</value>
+		</property>
+		<property name="period">
+			<value>300000</value>
+		</property>
+		<property name="timerTask">
+			<ref local="subscibeSend" />
+		</property>
+	</bean>
+	<bean id="timerFactory"
+		class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref local="loginErrorClearTimerTask" />
+				<ref local="voteUserClearTimerTask" />
+				<ref local="forumHistoryTimerTask" />
+				<ref local="userOnlineClearTimerTask" />
+				<ref local="boardCountTimerTask" />
+				<ref local="subscibeSendTimerTask" />
+			</list>
+		</property>
+	</bean>
+	<bean name="sysNumStatJob"
+		class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>
+				com.laoer.bbscs.service.scheduling.SysNumStatJob
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="sysNumStatService">
+					<ref local="sysNumStatService" />
+				</entry>
+				<entry key="userService">
+					<ref local="userService" />
+				</entry>
+				<entry key="forumService">
+					<ref local="forumService" />
+				</entry>
+				<entry key="forumHistoryService">
+					<ref local="forumHistoryService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean name="userTopFileJob"
+		class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>
+				com.laoer.bbscs.service.scheduling.UserTopFileJob
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="userTopService">
+					<ref local="userTopService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean name="forumArchivesJob"
+		class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>
+				com.laoer.bbscs.service.scheduling.ForumArchivesJob
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="forumArchivesService">
+					<ref local="forumArchivesService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="sysNumStatJobCronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sysNumStatJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+	<bean id="userTopFileJobCronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="userTopFileJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 4 ? * 2</value>
+			<!--<value>0 0 2 * * ?</value>-->
+		</property>
+	</bean>
+	<bean id="forumArchivesJobCronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="forumArchivesJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 4 1 * ?</value>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="sysNumStatJobCronTrigger" />
+				<ref local="userTopFileJobCronTrigger" />
+				<!--<ref local="forumArchivesJobCronTrigger"/>-->
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="imageDao" class="com.laoer.bbscs.dao.hibernate.ImageHibernateDAO">
+	     		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="imageService" parent="txProxyTemplate">
+	 <property name="target">
+	   <bean class="com.laoer.bbscs.service.imp.ImageServiceImpl">
+	   <property name="boardDAO" ref="boardDAO"></property>
+	   <property name="imageDao" ref="imageDao"></property>
+	   </bean>
+	 </property>
+	
+	</bean>
+</beans>

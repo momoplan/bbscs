@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Permission" table="bbscs_permission">
+    <id name="id" column="ID" type="long" unsaved-value="undefined">
+      <generator class="assigned"/>
+    </id>
+    <property column="PermissionName" length="255" name="permissionName" not-null="true" type="string"/>
+    <property column="PermissionResource" length="255" name="resource" type="string"/>
+    <property column="Action" length="255" name="action" type="string"/>
+    <property column="TypeID" length="2" name="typeID" not-null="true" type="int"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="SysNumStat" table="bbscs_sysnumstat">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="RecDate" length="20" name="recDate" not-null="true" type="string"/>
+    <property column="Num0" length="11" name="num0" not-null="true" type="long"/>
+    <property column="NumInc0" length="11" name="numInc0" not-null="true" type="long"/>
+    <property column="Num1" length="11" name="num1" not-null="true" type="long"/>
+    <property column="NumInc1" length="11" name="numInc1" not-null="true" type="long"/>
+    <property column="Num2" length="11" name="num2" not-null="true" type="long"/>
+    <property column="NumInc2" length="11" name="numInc2" not-null="true" type="long"/>
+    <property column="Num3" length="11" name="num3" not-null="true" type="long"/>
+    <property column="NumInc3" length="11" name="numInc3" not-null="true" type="long"/>
+    <property column="Num4" length="11" name="num4" not-null="true" type="long"/>
+    <property column="NumInc4" length="11" name="numInc4" not-null="true" type="long"/>
+    <property column="Num5" length="11" name="num5" not-null="true" type="long"/>
+    <property column="NumInc5" length="11" name="numInc5" not-null="true" type="long"/>
+    <property column="CreateTime" length="13" name="createTime" type="long"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,143 @@
+body {
+	font-family: Verdana, Tahoma, "宋体";
+	font-size: 9pt;
+	text-align: center;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+}
+#head {
+	width: 100%;
+	background-color: #F0F0F0;
+	margin-bottom: 2px;
+	height: 25px;
+}
+#head #head1 #headl {
+	text-align: left;
+	padding: 5px;
+	font-size: 14px;
+	font-weight: bold;
+}
+#head #head2 #headr {
+	text-align: right;
+	padding: 5px;
+}
+#head #head1 {
+	float: left;
+	width: 60%;
+}
+#head #head2 {
+	float: left;
+	width: 40%;
+}
+
+#info {
+	width: 100%;
+	margin-bottom: 2px;
+}
+#myinfo {
+	background-color: #F2F2FB;
+	height: 124px;
+	width: 100%;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #5175B7;
+	border-bottom-color: #5175B7;
+	margin-bottom: 2px;
+}
+#login {
+	background-color: #F2F2FB;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #5175B7;
+	border-bottom-color: #5175B7;
+	margin-bottom: 2px;
+}
+#board {
+	text-align: left;
+	width: 100%;
+	margin-bottom: 2px;
+}
+#posts {
+	width: 100%;
+	margin-bottom: 2px;
+	text-align: left;
+}
+#topuser {
+	text-align: left;
+	width: 100%;
+	margin-bottom: 2px;
+}
+#search {
+	width: 100%;
+	margin-bottom: 2px;
+}
+
+
+
+
+
+#board #boardl {
+	margin-right: 2px;
+	margin-left: 2px;
+}
+
+#login #login1 {
+	padding: 5px;
+}
+
+#myinfo #myinfo1 #myface {
+	height: 120px;
+	width: 20%;
+	float: left;
+}
+#myinfo #myinfo1 #logininfo1 {
+	line-height: 24px;
+	text-align: left;
+}
+#myinfo #myinfo1 #usertools1 {
+	line-height: 24px;
+	text-align: center;
+}
+
+#myinfo #myinfo1 #logininfo {
+	float: left;
+	height: 120px;
+	width: 50%;
+	text-align: left;
+	line-height: 22px;
+}
+#myinfo #myinfo1 #usertools {
+	float: left;
+	height: 120px;
+	width: 30%;
+	line-height: 22px;
+}
+#myinfo #myinfo1 {
+	height: 120px;
+	margin-top: 2px;
+	margin-left: 2px;
+}
+
+
+
+#info #info1 {
+	text-align: right;
+	padding: 3px;
+}
+#info #info2 {
+	text-align: right;
+	padding: 3px;
+}
+
+
+.font1 {
+	font-family: Verdana, Tahoma, "宋体";
+	font-size: 14px;
+}

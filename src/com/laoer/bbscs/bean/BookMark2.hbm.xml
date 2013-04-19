@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="BookMark2" table="bbscs_bookmark_2">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="UserID" length="40" name="userID" not-null="true" type="string"/>
+    <property column="BookMarkName" length="255" name="bookMarkName" not-null="true" type="string"/>
+    <property column="Url" length="255" name="url" type="string"/>
+    <property column="Alt" length="255" name="alt" type="string"/>
+    <property column="IsShare" length="1" name="isShare" type="int"/>
+    <property column="CreateTime" name="createTime" not-null="true" type="timestamp"/>
+  </class>
+</hibernate-mapping>

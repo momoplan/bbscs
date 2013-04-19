@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="UserTop" table="bbscs_usertop">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="UserID" length="40" name="userID" not-null="true" type="string"/>
+    <property column="UserName" length="20" name="userName" not-null="true" type="string"/>
+    <property column="NickName" length="60" name="nickName" not-null="true" type="string"/>
+    <property column="ValueType" length="2" name="valueType" not-null="true" type="int"/>
+    <property column="UserValue" length="11" name="userValue" type="int"/>
+    <property column="ValueInc" length="11" name="valueInc" type="int"/>
+  </class>
+</hibernate-mapping>

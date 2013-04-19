@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="BoardMaster" table="bbscs_boardmaster">
+    <id name="id" column="ID" type="long" unsaved-value="null">
+      <generator class="sequence">
+        <param name="sequence">SEQ_BOARDMASTER_ID</param>
+      </generator>
+    </id>
+    <!--<property column="BoardID" length="20" name="boardID" not-null="true" type="long"/>-->
+    <property column="UserName" length="20" name="userName" not-null="true" type="string"/>
+    <property column="RoleID" length="11" name="roleID" type="int"/>
+    <property column="OverChildPurview" length="1" name="overChildPurview" type="int"/>
+    <property column="IsHidden" length="1" name="isHidden" type="int"/>
+    <!--<property column="Purview" name="purview" type="com.laoer.bbscs.ext.hibernate.SplitList"/>-->
+    <many-to-one name="board" column="BoardID" class="Board"/>
+  </class>
+</hibernate-mapping>

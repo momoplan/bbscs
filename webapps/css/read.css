@@ -1,0 +1,101 @@
+body {
+	font-family: Verdana, Tahoma, "宋体";
+	font-size: 9pt;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+#head1 {
+	background-color: #FAFAFA;
+}
+#head2 {
+	clear: both;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #E6E6E6;
+	margin-bottom: 2px;
+}
+#content #postlist {
+	float: left;
+	width: 83%;
+}
+#head2 #head2content {
+	padding: 5px;
+}
+
+#head1 #head1left {
+	width: 40%;
+	float: left;
+	background-color: #FAFAFA;
+}
+#content #siderbar {
+	float: right;
+	width: 17%;
+}
+#content #postlist #postlistcontent {
+	margin-right: 1px;
+}
+#content #siderbar #siderbarcontent {
+	margin-right: 2px;
+	background-color: #F2F2FB;
+}
+#footer {
+	clear: both;
+	text-align: center;
+}
+#footer #adv4 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+#footer #footcontent {
+	margin-top: 5px;
+}
+
+.topicdiv {
+	margin-bottom: 4px;
+	background-color: #FFFFFF;
+	margin-right: 2px;
+	margin-left: 2px;
+}
+#content #postlist #postlistcontent #pagebreak {
+	background-color: #F2F2FB;
+	padding: 4px;
+	margin-top: 2px;
+	margin-bottom: 4px;
+	margin-right: 2px;
+	margin-left: 2px;
+	text-align: right;
+}
+
+.siderbartitle {
+	background-color: #C2CFE7;
+	border: 1px solid #7592C8;
+	padding: 4px;
+	font-family: Verdana, Tahoma, "宋体";
+	font-size: 14px;
+	text-align: center;
+}
+.siderbarcontent {
+	padding: 4px;
+}
+
+
+#head1 #head1right {
+	width: 60%;
+	float: right;
+	background-color: #FAFAFA;
+}
+#head1 #head1left #head1lcontent {
+	padding: 5px;
+}
+#head1 #head1right #head1rcontent {
+	padding: 5px;
+	text-align: right;
+}
+
+
+#main {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}

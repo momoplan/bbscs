@@ -1,0 +1,96 @@
+body {
+	font-family: Verdana, Tahoma, "宋体";
+	font-size: 9pt;
+	background-color: #F6F6F6;
+	margin: 0px;
+	padding: 30px;
+}
+table {
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	width: 100%;
+	position: relative;
+	top: -4px;
+	left:-4px;
+}
+table tr {
+	background-color: #F7F7F7;
+}
+table .trp {
+	background-color: #FFFFFF;
+}
+table caption {
+	background-color: #FFFFFF;
+	text-align: left;
+	margin: 0px;
+	padding-top: 8px;
+	padding-right: 20px;
+	padding-bottom: 8px;
+	padding-left: 20px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-top-color: #000000;
+	border-right-color: #000000;
+	border-left-color: #000000;
+	font-family: Verdana, Tahoma, "宋体";
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+}
+#forums {
+	background-color: #919191;
+}
+
+table .trt {
+	background-color: #e6e6e6;
+}
+table .name {
+	text-align: left;
+	font-family: Verdana, Tahoma, "宋体";
+}
+table .name1 {
+	font-family: Verdana, Tahoma, "宋体";
+	font-size: 14px;
+	text-align: left;
+}
+
+table th,table td {
+	text-align: center;
+	margin: 0px;
+	padding-top: 8px;
+	padding-right: 20px;
+	padding-bottom: 8px;
+	padding-left: 20px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #b5b5b5;
+}
+a {
+    color: #1428B1;
+	text-decoration: none ;
+	font-family:Verdana, Tahoma, "宋体";
+}
+a:link {
+    text-decoration: none;
+	color: #1428B1;
+	font-family:Verdana, Tahoma, "宋体";
+}
+a:visited {
+    text-decoration: none;
+	color: #1428B1;
+	font-family:Verdana, Tahoma, "宋体";
+}
+a:hover {
+    text-decoration: underline;
+	color: #FF6600;
+	font-family:Verdana, Tahoma, "宋体";
+}
+a:active {
+    text-decoration: underline;
+	color: #FF6600;
+	font-family:Verdana, Tahoma, "宋体";
+}

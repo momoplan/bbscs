@@ -1,0 +1,13 @@
+RewriteEngine on
+RewriteBase /
+RewriteRule ^forum\-(\w+)\-(\d+)\-(\w+)\-(\d+)\-(\d+)\.html$ /forum.bbscs?action=$1&bid=$2&tagId=$3&page=$4&total=$5 [NC,L]
+RewriteRule ^forum\-(\w+)\-(\d+)\.html$ /forum.bbscs?action=$1&bid=$2 [NC,L]
+RewriteRule ^read\-(\w+)\-(\d+)\-(\w+)\-(\w+)\-(\d+)\-(\w+)\-(\d+)\.html$ /read.bbscs?action=$1&bid=$2&id=$3&tagId=$4&fcpage=$5&fcaction=$6&inpages=$7  [NC,L]
+RewriteRule ^main\.html$ /main.bbscs [NC,L]
+RewriteRule ^main\-(\w+)\-(\d+)\-(\w+)\.html$ /main.bbscs?action=$1&bid=$2&postID=$3 [NC,L]
+RewriteRule ^nag\.html$ /nag.bbscs?action=index [NC,L]
+#RewriteRule ^main\.html$ /main.bbscs [NC,L]
+#SetEnvIfNoCase User-Agent "^baiduspider" ban_bot
+#SetEnvIfNoCase User-Agent "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" ban_bot
+#SetEnvIfNoCase User-Agent "^sogou" ban_bot
+#deny from env=ban_bot

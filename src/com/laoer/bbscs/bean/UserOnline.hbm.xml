@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="UserOnline" table="bbscs_useronline">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="UserID" length="40" name="userID" not-null="true" type="string"/>
+    <property column="UserName" length="60" name="userName" not-null="true" type="string"/>
+    <property column="NickName" length="60" name="nickName" not-null="true" type="string"/>
+    <property column="OnlineTime" length="20" name="onlineTime" type="long"/>
+    <property column="BoardID" length="20" name="boardID" type="long"/>
+    <property column="AtPlace" length="255" name="atPlace" type="string"/>
+    <property column="UserGroupID" length="11" name="userGroupID" type="int"/>
+    <property column="ValidateCode" length="100" name="validateCode" type="string"/>
+    <property column="HiddenUser" length="1" name="hiddenUser" type="int"/>
+  </class>
+</hibernate-mapping>

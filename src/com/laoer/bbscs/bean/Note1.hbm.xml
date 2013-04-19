@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Note1" table="bbscs_note_1">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="FromID" length="40" name="fromID" not-null="true" type="string"/>
+    <property column="FromUserName" length="20" name="fromUserName" not-null="true" type="string"/>
+    <property column="FromNickName" length="60" name="fromNickName" not-null="true" type="string"/>
+    <property column="ToID" length="40" name="toID" not-null="true" type="string"/>
+    <property column="ToUserName" length="20" name="toUserName" not-null="true" type="string"/>
+    <property column="ToNickName" length="60" name="toNickName" not-null="true" type="string"/>
+    <property column="NoteType" length="1" name="noteType" not-null="true" type="int"/>
+    <property column="NoteTitle" length="150" name="noteTitle" not-null="true" type="string"/>
+    <property column="NoteContext" name="noteContext" not-null="true" type="text"/>
+    <property column="CreateTime" name="createTime" not-null="true" type="timestamp"/>
+    <property column="IsNew" length="1" name="isNew" type="int"/>
+    <property column="NeedRe" length="1" name="needRe" type="int"/>
+    <property column="IsRe" length="1" name="isRe" type="int"/>
+    <property column="SysMsg" length="1" name="sysMsg" type="int"/>
+  </class>
+</hibernate-mapping>

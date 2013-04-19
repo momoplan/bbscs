@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<bean id="regAction" class="com.laoer.bbscs.web.action.Reg"
+		scope="prototype" autowire="byName">
+		<!--
+			<property name="userService">
+			<ref bean="userService" />
+			</property>
+			<property name="sysConfig">
+			<ref bean="sysConfig" />
+			</property>
+			<property name="ipSeeker">
+			<ref bean="ipSeeker" />
+			</property>
+			<property name="templateMail">
+			<ref bean="templateMail" />
+			</property>
+		-->
+	</bean>
+	<bean id="regValidateAction" class="com.laoer.bbscs.web.action.RegValidate"
+		scope="prototype" autowire="byName">
+	</bean>
+	<bean id="checkUserNameAction"
+		class="com.laoer.bbscs.web.action.CheckUserName" scope="prototype"
+		autowire="byName">
+		<!--
+			<property name="userService">
+			<ref bean="userService" />
+			</property>
+			<property name="sysConfig">
+			<ref bean="sysConfig" />
+			</property>
+			<property name="ajaxMessagesJson">
+			<ref bean="ajaxMessagesJson" />
+			</property>
+		-->
+	</bean>
+	<bean id="loginAction" class="com.laoer.bbscs.web.action.Login"
+		scope="prototype" autowire="byName">
+		<!--
+			<property name="sysConfig">
+			<ref bean="sysConfig" />
+			</property>
+		-->
+	</bean>
+	<bean id="adminLogoutAction"
+		class="com.laoer.bbscs.web.action.AdminLogout" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminOpenSetAction"
+		class="com.laoer.bbscs.web.action.AdminOpenSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminWebsetAction"
+		class="com.laoer.bbscs.web.action.AdminWebset" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminBaseSetAction"
+		class="com.laoer.bbscs.web.action.AdminBaseSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminDateTimeFormatSetAction"
+		class="com.laoer.bbscs.web.action.AdminDateTimeFormatSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminCookiePassSetAction"
+		class="com.laoer.bbscs.web.action.AdminCookiePassSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminScreenSetAction"
+		class="com.laoer.bbscs.web.action.AdminScreenSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminEmailSetAction"
+		class="com.laoer.bbscs.web.action.AdminEmailSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminUserRegSetAction"
+		class="com.laoer.bbscs.web.action.AdminUserRegSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminUserProSetAction"
+		class="com.laoer.bbscs.web.action.AdminUserProSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminFaceSetAction"
+		class="com.laoer.bbscs.web.action.AdminFaceSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminForbidSetAction"
+		class="com.laoer.bbscs.web.action.AdminForbidSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminPostSetAction"
+		class="com.laoer.bbscs.web.action.AdminPostSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminAttachSetAction"
+		class="com.laoer.bbscs.web.action.AdminAttachSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminVoteSetAction"
+		class="com.laoer.bbscs.web.action.AdminVoteSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminPmSetAction"
+		class="com.laoer.bbscs.web.action.AdminPmSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminForumViewSetAction"
+		class="com.laoer.bbscs.web.action.AdminForumViewSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminPostViewSetAction"
+		class="com.laoer.bbscs.web.action.AdminPostViewSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminPostHiddenSetAction"
+		class="com.laoer.bbscs.web.action.AdminPostHiddenSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminUOTimeSetAction"
+		class="com.laoer.bbscs.web.action.AdminUOTimeSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminUserLevelAction"
+		class="com.laoer.bbscs.web.action.AdminUserLevel" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminBoardListAction"
+		class="com.laoer.bbscs.web.action.AdminBoardList" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminBoardSetAction"
+		class="com.laoer.bbscs.web.action.AdminBoardSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminBoardMasterListAction"
+		class="com.laoer.bbscs.web.action.AdminBoardMasterList" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminBoardMasterSetAction"
+		class="com.laoer.bbscs.web.action.AdminBoardMasterSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminBoardTagAction"
+		class="com.laoer.bbscs.web.action.AdminBoardTag" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminBoardUgAction"
+		class="com.laoer.bbscs.web.action.AdminBoardUg" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminPermissionAction"
+		class="com.laoer.bbscs.web.action.AdminPermission" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminRoleAction"
+		class="com.laoer.bbscs.web.action.AdminRole" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminUgSetAction"
+		class="com.laoer.bbscs.web.action.AdminUgSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="adminUserSearchAction"
+		class="com.laoer.bbscs.web.action.AdminUserSearch" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="nagAction"
+		class="com.laoer.bbscs.web.action.Nag" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="logoutAction"
+		class="com.laoer.bbscs.web.action.Logout" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="signSetAction"
+		class="com.laoer.bbscs.web.action.SignSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="nickNameSetAction"
+		class="com.laoer.bbscs.web.action.NickNameSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="userConfigSetAction"
+		class="com.laoer.bbscs.web.action.UserConfigSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="friendSetAction"
+		class="com.laoer.bbscs.web.action.FriendSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="noteAction"
+		class="com.laoer.bbscs.web.action.NoteAction" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="bookMarkAction"
+		class="com.laoer.bbscs.web.action.BookMarkAction" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="userFaceAction"
+		class="com.laoer.bbscs.web.action.UserFace" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="userDetailSetAction"
+		class="com.laoer.bbscs.web.action.UserDetailSet" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="cpasswdAction"
+		class="com.laoer.bbscs.web.action.Cpasswd" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="boardSaveManageAction"
+		class="com.laoer.bbscs.web.action.BoardSaveManage" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="forumAction"
+		class="com.laoer.bbscs.web.action.ForumAction" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="postAction"
+		class="com.laoer.bbscs.web.action.Post" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="readAction"
+		class="com.laoer.bbscs.web.action.Read" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="delAttachAction"
+		class="com.laoer.bbscs.web.action.DelAttach" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="votePostAction"
+		class="com.laoer.bbscs.web.action.VotePost" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="voteOptAction"
+		class="com.laoer.bbscs.web.action.VoteOpt" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="postOptAction"
+		class="com.laoer.bbscs.web.action.PostOpt" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="moveForumAction"
+		class="com.laoer.bbscs.web.action.MoveForum" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="boardSaveAction"
+		class="com.laoer.bbscs.web.action.BoardSaveAction" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="subsAction"
+		class="com.laoer.bbscs.web.action.Subs" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="forumManageAction"
+		class="com.laoer.bbscs.web.action.ForumManage" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="postWaitAuditAction"
+		class="com.laoer.bbscs.web.action.PostWaitAudit" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="manageAdvanceAction"
+		class="com.laoer.bbscs.web.action.ManageAdvance" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="forumSearchAction"
+		class="com.laoer.bbscs.web.action.ForumSearch" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="userInfoAction"
+		class="com.laoer.bbscs.web.action.UserInfoAction" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="inAction"
+		class="com.laoer.bbscs.web.action.In" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="onlineAction"
+		class="com.laoer.bbscs.web.action.Online" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="userShowAction"
+		class="com.laoer.bbscs.web.action.UserShow" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="sysNumStatAction"
+		class="com.laoer.bbscs.web.action.SysNumStatAction" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="refineAction"
+		class="com.laoer.bbscs.web.action.Refine" scope="prototype"
+		autowire="byName">
+	</bean>
+	<bean id="boardPasswdAction"
+		class="com.laoer.bbscs.web.action.BoardPasswd" scope="prototype"
+		autowire="byName">
+	</bean>
+	
+		<bean id="imageAction" class="com.laoer.bbscs.web.action.ImageAction"
+		scope="prototype" autowire="byName">
+	</bean>
+</beans>

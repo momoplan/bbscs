@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="ForumBuy" table="bbscs_forumbuy">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="PostID" length="40" name="postID" not-null="true" type="string"/>
+    <property column="BuyFromID" length="40" name="buyFromID" not-null="true" type="string"/>
+    <property column="BuyFromName" length="20" name="buyFromName" not-null="true" type="string"/>
+    <property column="BuyToID" length="40" name="buyToID" not-null="true" type="string"/>
+    <property column="BuyToName" length="20" name="buyToName" not-null="true" type="string"/>
+    <property column="BuyPrice" length="11" name="buyPrice" not-null="true" type="int"/>
+    <property column="BuyToUserIncome" length="11" name="buyToUserIncome" not-null="true" type="int"/>
+    <property column="BuyTime" name="buyTime" not-null="true" type="long"/>
+  </class>
+</hibernate-mapping>

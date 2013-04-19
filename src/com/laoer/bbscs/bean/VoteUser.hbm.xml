@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="VoteUser" table="bbscs_voteuser">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="VoteID" length="40" name="voteID" not-null="true" type="string"/>
+    <property column="VoteUserID" length="40" name="voteUserID" not-null="true" type="string"/>
+    <property column="VoteTime" length="13" name="voteTime" not-null="true" type="long"/>
+  </class>
+</hibernate-mapping>

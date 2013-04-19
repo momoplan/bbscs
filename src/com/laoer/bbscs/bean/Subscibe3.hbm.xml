@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="Subscibe3" table="bbscs_subscibe_3">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="uuid"/>
+    </id>
+    <property column="UserID" length="40" name="userID" not-null="true" type="string"/>
+    <property column="UserName" length="20" name="userName" not-null="true" type="string"/>
+    <property column="NickName" length="60" name="nickName" not-null="true" type="string"/>
+    <property column="PostID" length="60" name="postID" not-null="true" type="string"/>
+    <property column="PostTitle" length="150" name="postTitle" type="string"/>
+    <property column="BoardID" length="13" name="boardID" not-null="true" type="long"/>
+    <property column="Emailinform" length="1" name="emailinform" type="int"/>
+    <property column="Msginform" length="1" name="msginform" type="int"/>
+    <property column="UserEmail" length="255" name="userEmail" type="string"/>
+    <property column="CreateTime" name="createTime" not-null="true" type="timestamp"/>
+    <property column="UserLocale" length="20" name="userLocale" type="string"/>
+  </class>
+</hibernate-mapping>

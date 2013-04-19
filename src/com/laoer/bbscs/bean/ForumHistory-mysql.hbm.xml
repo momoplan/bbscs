@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.laoer.bbscs.bean">
+  <class name="ForumHistory" table="bbscs_forum_history">
+    <id name="id" column="ID" type="string" unsaved-value="null">
+      <generator class="assigned"/>
+    </id>
+    <property column="ParentID" length="40" name="parentID" not-null="true" type="string"/>
+    <property column="MainID" length="40" name="mainID" not-null="true" type="string"/>
+    <property column="BoardID" length="20" name="boardID" not-null="true" type="long"/>
+    <property column="BoardName" length="60" name="boardName" type="string"/>
+    <property column="ReNum" length="11" name="reNum" type="int"/>
+    <property column="Face" length="2" name="face" type="int"/>
+    <property column="UserID" length="40" name="userID" type="string"/>
+    <property column="UserName" length="20" name="userName" type="string"/>
+    <property column="NickName" length="60" name="nickName" type="string"/>
+    <property column="Title" length="150" name="title" type="string"/>
+    <property column="Detail" name="detail" type="text"/>
+    <property column="Sign" name="sign" type="text"/>
+    <property column="ArtSize" length="11" name="artSize" type="int"/>
+    <property column="Click" length="11" name="click" type="int"/>
+    <property column="PostTime" length="20" name="postTime" type="long"/>
+    <property column="LastTime" length="20" name="lastTime" type="long"/>
+    <property column="IPAddress" length="20" name="ipAddress" type="string"/>
+    <property column="IsNew" length="1" name="isNew" type="int"/>
+    <property column="Elite" length="20" name="elite" type="long"/>
+    <property column="EliteID" length="20" name="eliteID" type="long"/>
+    <property column="Agree" length="11" name="agree" type="int"/>
+    <property column="BeAgainst" length="11" name="beAgainst" type="int"/>
+    <property column="CanNotDel" length="1" name="canNotDel" type="int"/>
+    <property column="CanNotRe" length="1" name="canNotRe" type="int"/>
+    <property column="Commend" length="20" name="commend" type="long"/>
+    <property column="DelSign" length="1" name="delSign" type="int"/>
+    <property column="DelUserID" length="40" name="delUserID" type="string"/>
+    <property column="DelUserName" length="20" name="delUserName" type="string"/>
+    <property column="DelTime" length="20" name="delTime" type="long"/>
+    <property column="DelIP" length="20" name="delIP" type="string"/>
+    <property column="Amend" length="255" name="amend" type="string"/>
+    <property column="DoEliteName" length="20" name="doEliteName" type="string"/>
+    <property column="DoEliteTime" length="20" name="doEliteTime" type="long"/>
+    <property column="HaveAttachFile" length="1" name="haveAttachFile" type="int"/>
+    <property column="AttachFileName" name="attachFileName" type="com.laoer.bbscs.ext.hibernate.SplitStringList"/>
+    <property column="LastPostUserName" length="20" name="lastPostUserName" type="string"/>
+    <property column="LastPostTitle" length="150" name="lastPostTitle" type="string"/>
+    <property column="LastPostNickName" length="60" name="lastPostNickName" type="string"/>
+    <property column="IsTop" length="1" name="isTop" type="long"/>
+    <property column="IsLock" length="20" name="isLock" type="int"/>
+    <property column="Auditing" length="1" name="auditing" type="int"/>
+    <property column="AuditingAttachFile" length="1" name="auditingAttachFile" type="int"/>
+    <property column="IsVote" length="1" name="isVote" type="int"/>
+    <property column="IsHidden" length="4" name="isHidden" type="int"/>
+    <property column="IsHiddenValue" length="11" name="isHiddenValue" type="int"/>
+    <property column="EditType" length="1" name="editType" type="int"/>
+    <property column="QuoteText" name="quoteText" type="text"/>
+    <property column="QuoteEditType" length="1" name="quoteEditType" type="int"/>
+    <property column="PostType" length="1" name="postType" type="int"/>
+    <property column="TitleColor" length="2" name="titleColor" type="int"/>
+    <property column="UserBlog" length="1" name="userBlog" type="int"/>
+    <property column="IndexStatus" length="1" name="indexStatus" type="int"/>
+    <property column="EmailInform" length="1" name="emailInform" type="int"/>
+    <property column="MsgInform" length="1" name="msgInform" type="int"/>
+    <property column="VoteID" length="40" name="voteID" type="string"/>
+    <property column="TagID" length="40" name="tagID" type="string"/>
+    <property column="TagName" length="255" name="tagName" type="string"/>
+    <property column="IsGuest" length="1" name="isGuest" type="int"/>
+    <property column="PreviewAttach" length="1" name="previewAttach" type="int"/>
+    <property column="IsAnonymousReply" length="1" name="isAnonymousReply" type="int"/>
+  </class>
+</hibernate-mapping>
